@@ -1,0 +1,33 @@
+package exp.Aqualush.commits.change5;
+
+import core.algo.JSS2015_CSTI;
+import core.dataset.TextDataset;
+import core.ir.IR;
+import core.ir.IRModelConst;
+import core.metrics.Result;
+import exp.Aqualush.AqualushSetting;
+
+/**
+ * Created by niejia on 16/1/10.
+ */
+public class Aqualush_VSM_CochangeRegion_Change5 {
+
+    public static void main(String[] args) {
+
+        changeRegion(AqualushSetting.Aqualush_Change5_GroupedByMethod, AqualushSetting.Aqualush_CleanedRequirement,
+                AqualushSetting.AqualushOracleChange5, "Change5");
+
+    }
+
+    public static void changeRegion(String code, String req, String oracle, String change) {
+        System.out.println("----------" + change + "----------");
+        TextDataset textDataset = new TextDataset(code,
+                req, oracle);
+
+        Result result_ir = IR.compute(textDataset, IRModelConst.VSM_ALL, new JSS2015_CSTI(), change);
+        result_ir.showMatrix();
+        result_ir.showAveragePrecisionByRanklist();
+        System.out.println("--------------------");
+    }
+
+}
